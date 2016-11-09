@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TWSDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TWSDataModelStoreContainer">
+    <EntitySet Name="Humen" EntityType="TWSDataModel.Store.Humen" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HumanMarriages" EntityType="TWSDataModel.Store.HumanMarriages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MarriageChilds" EntityType="TWSDataModel.Store.MarriageChilds" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pregnants" EntityType="TWSDataModel.Store.Pregnants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IllegalPregnants" EntityType="TWSDataModel.Store.IllegalPregnants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="IllegalChilds" EntityType="TWSDataModel.Store.IllegalChilds" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Humen_MaleHuman" EntityType="TWSDataModel.Store.Humen_MaleHuman" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Humen_FemaleHuman" EntityType="TWSDataModel.Store.Humen_FemaleHuman" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="MaleHumanHumanMarriage" Association="TWSDataModel.Store.MaleHumanHumanMarriage">
+      <End Role="MaleHuman" EntitySet="Humen_MaleHuman" />
+      <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+    </AssociationSet>
+    <AssociationSet Name="HumanMarriageMarriageChild" Association="TWSDataModel.Store.HumanMarriageMarriageChild">
+      <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+      <End Role="MarriageChild" EntitySet="MarriageChilds" />
+    </AssociationSet>
+    <AssociationSet Name="FemaleHumanHumanMarriage" Association="TWSDataModel.Store.FemaleHumanHumanMarriage">
+      <End Role="FemaleHuman" EntitySet="Humen_FemaleHuman" />
+      <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+    </AssociationSet>
+    <AssociationSet Name="HumanMarriageChild" Association="TWSDataModel.Store.HumanMarriageChild">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="MarriageChild" EntitySet="MarriageChilds" />
+    </AssociationSet>
+    <AssociationSet Name="PregnantMarriageChild" Association="TWSDataModel.Store.PregnantMarriageChild">
+      <End Role="Pregnant" EntitySet="Pregnants" />
+      <End Role="MarriageChild" EntitySet="MarriageChilds" />
+    </AssociationSet>
+    <AssociationSet Name="HumanMarriagePregnant" Association="TWSDataModel.Store.HumanMarriagePregnant">
+      <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+      <End Role="Pregnant" EntitySet="Pregnants" />
+    </AssociationSet>
+    <AssociationSet Name="FemaleHumanIlligalPregnant" Association="TWSDataModel.Store.FemaleHumanIllegalPregnant">
+      <End Role="FemaleHuman" EntitySet="Humen_FemaleHuman" />
+      <End Role="IlligalPregnant" EntitySet="IllegalPregnants" />
+    </AssociationSet>
+    <AssociationSet Name="MaleHumanIllegalPregnant" Association="TWSDataModel.Store.MaleHumanIllegalPregnant">
+      <End Role="MaleHuman" EntitySet="Humen_MaleHuman" />
+      <End Role="IllegalPregnant" EntitySet="IllegalPregnants" />
+    </AssociationSet>
+    <AssociationSet Name="IllegalPregnantIllegalChild" Association="TWSDataModel.Store.IllegalPregnantIllegalChild">
+      <End Role="IllegalPregnant" EntitySet="IllegalPregnants" />
+      <End Role="IllegalChild" EntitySet="IllegalChilds" />
+    </AssociationSet>
+    <AssociationSet Name="HumanIllegalChild" Association="TWSDataModel.Store.HumanIllegalChild">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="IllegalChild" EntitySet="IllegalChilds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaleHuman_inherits_Human" Association="TWSDataModel.Store.FK_MaleHuman_inherits_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="MaleHuman" EntitySet="Humen_MaleHuman" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FemaleHuman_inherits_Human" Association="TWSDataModel.Store.FK_FemaleHuman_inherits_Human">
+      <End Role="Human" EntitySet="Humen" />
+      <End Role="FemaleHuman" EntitySet="Humen_FemaleHuman" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Humen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="DateOfDeath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sex" Type="bit" Nullable="false" />
+    <Property Name="BaseFertilityLevel" Type="float" Nullable="false" />
+    <Property Name="BaseMarriageDesire" Type="float" Nullable="false" />
+    <Property Name="ChildInfo_ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HumanMarriages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaleHumanID" Type="bigint" Nullable="false" />
+    <Property Name="FemaleHumanID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MarriageChilds">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HumanMarriageID" Type="bigint" Nullable="false" />
+    <Property Name="Pregnant_ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pregnants">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="HumanMarriageID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IllegalPregnants">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="FemaleHumanID" Type="bigint" Nullable="false" />
+    <Property Name="MaleHumanID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IllegalChilds">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IllegalPregnant_ID" Type="bigint" Nullable="false" />
+    <Property Name="HumanInfo_ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Humen_MaleHuman">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Humen_FemaleHuman">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="MaleHumanHumanMarriage">
+    <End Role="MaleHuman" Type="TWSDataModel.Store.Humen_MaleHuman" Multiplicity="1" />
+    <End Role="HumanMarriage" Type="TWSDataModel.Store.HumanMarriages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaleHuman">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HumanMarriage">
+        <PropertyRef Name="MaleHumanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HumanMarriageMarriageChild">
+    <End Role="HumanMarriage" Type="TWSDataModel.Store.HumanMarriages" Multiplicity="1" />
+    <End Role="MarriageChild" Type="TWSDataModel.Store.MarriageChilds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HumanMarriage">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MarriageChild">
+        <PropertyRef Name="HumanMarriageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FemaleHumanHumanMarriage">
+    <End Role="FemaleHuman" Type="TWSDataModel.Store.Humen_FemaleHuman" Multiplicity="1" />
+    <End Role="HumanMarriage" Type="TWSDataModel.Store.HumanMarriages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FemaleHuman">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HumanMarriage">
+        <PropertyRef Name="FemaleHumanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HumanMarriageChild">
+    <End Role="Human" Type="TWSDataModel.Store.Humen" Multiplicity="*" />
+    <End Role="MarriageChild" Type="TWSDataModel.Store.MarriageChilds" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="MarriageChild">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Human">
+        <PropertyRef Name="ChildInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PregnantMarriageChild">
+    <End Role="Pregnant" Type="TWSDataModel.Store.Pregnants" Multiplicity="1" />
+    <End Role="MarriageChild" Type="TWSDataModel.Store.MarriageChilds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pregnant">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MarriageChild">
+        <PropertyRef Name="Pregnant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HumanMarriagePregnant">
+    <End Role="HumanMarriage" Type="TWSDataModel.Store.HumanMarriages" Multiplicity="1" />
+    <End Role="Pregnant" Type="TWSDataModel.Store.Pregnants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HumanMarriage">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Pregnant">
+        <PropertyRef Name="HumanMarriageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FemaleHumanIllegalPregnant">
+    <End Role="FemaleHuman" Type="TWSDataModel.Store.Humen_FemaleHuman" Multiplicity="1" />
+    <End Role="IlligalPregnant" Type="TWSDataModel.Store.IllegalPregnants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FemaleHuman">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IlligalPregnant">
+        <PropertyRef Name="FemaleHumanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MaleHumanIllegalPregnant">
+    <End Role="MaleHuman" Type="TWSDataModel.Store.Humen_MaleHuman" Multiplicity="1" />
+    <End Role="IllegalPregnant" Type="TWSDataModel.Store.IllegalPregnants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaleHuman">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IllegalPregnant">
+        <PropertyRef Name="MaleHumanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IllegalPregnantIllegalChild">
+    <End Role="IllegalPregnant" Type="TWSDataModel.Store.IllegalPregnants" Multiplicity="1" />
+    <End Role="IllegalChild" Type="TWSDataModel.Store.IllegalChilds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IllegalPregnant">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IllegalChild">
+        <PropertyRef Name="IllegalPregnant_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HumanIllegalChild">
+    <End Role="Human" Type="TWSDataModel.Store.Humen" Multiplicity="1" />
+    <End Role="IllegalChild" Type="TWSDataModel.Store.IllegalChilds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IllegalChild">
+        <PropertyRef Name="HumanInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaleHuman_inherits_Human">
+    <End Role="Human" Type="TWSDataModel.Store.Humen" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MaleHuman" Type="TWSDataModel.Store.Humen_MaleHuman" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MaleHuman">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FemaleHuman_inherits_Human">
+    <End Role="Human" Type="TWSDataModel.Store.Humen" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FemaleHuman" Type="TWSDataModel.Store.Humen_FemaleHuman" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Human">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FemaleHuman">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TWSDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TWSDataEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Humen" EntityType="TWSDataModel.Human" />
+          <EntitySet Name="HumanMarriages" EntityType="TWSDataModel.HumanMarriage" />
+          <AssociationSet Name="MaleHumanHumanMarriage" Association="TWSDataModel.MaleHumanHumanMarriage">
+            <End Role="MaleHuman" EntitySet="Humen" />
+            <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+          </AssociationSet>
+          <EntitySet Name="MarriageChilds" EntityType="TWSDataModel.MarriageChild" />
+          <AssociationSet Name="HumanMarriageMarriageChild" Association="TWSDataModel.HumanMarriageMarriageChild">
+            <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+            <End Role="MarriageChild" EntitySet="MarriageChilds" />
+          </AssociationSet>
+          <AssociationSet Name="FemaleHumanHumanMarriage" Association="TWSDataModel.FemaleHumanHumanMarriage">
+            <End Role="FemaleHuman" EntitySet="Humen" />
+            <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+          </AssociationSet>
+          <EntitySet Name="Pregnants" EntityType="TWSDataModel.Pregnant" />
+          <AssociationSet Name="HumanMarriageChild" Association="TWSDataModel.HumanMarriageChild">
+            <End Role="Human" EntitySet="Humen" />
+            <End Role="MarriageChild" EntitySet="MarriageChilds" />
+          </AssociationSet>
+          <AssociationSet Name="PregnantMarriageChild" Association="TWSDataModel.PregnantMarriageChild">
+            <End Role="Pregnant" EntitySet="Pregnants" />
+            <End Role="MarriageChild" EntitySet="MarriageChilds" />
+          </AssociationSet>
+          <AssociationSet Name="HumanMarriagePregnant" Association="TWSDataModel.HumanMarriagePregnant">
+            <End Role="HumanMarriage" EntitySet="HumanMarriages" />
+            <End Role="Pregnant" EntitySet="Pregnants" />
+          </AssociationSet>
+          <EntitySet Name="IllegalPregnants" EntityType="TWSDataModel.IllegalPregnant" />
+          <AssociationSet Name="FemaleHumanIlligalPregnant" Association="TWSDataModel.FemaleHumanIllegalPregnant">
+            <End Role="FemaleHuman" EntitySet="Humen" />
+            <End Role="IlligalPregnant" EntitySet="IllegalPregnants" />
+          </AssociationSet>
+          <AssociationSet Name="MaleHumanIllegalPregnant" Association="TWSDataModel.MaleHumanIllegalPregnant">
+            <End Role="MaleHuman" EntitySet="Humen" />
+            <End Role="IllegalPregnant" EntitySet="IllegalPregnants" />
+          </AssociationSet>
+          <EntitySet Name="IllegalChilds" EntityType="TWSDataModel.IllegalChild" />
+          <AssociationSet Name="IllegalPregnantIllegalChild" Association="TWSDataModel.IllegalPregnantIllegalChild">
+            <End Role="IllegalPregnant" EntitySet="IllegalPregnants" />
+            <End Role="IllegalChild" EntitySet="IllegalChilds" />
+          </AssociationSet>
+          <AssociationSet Name="HumanIllegalChild" Association="TWSDataModel.HumanIllegalChild">
+            <End Role="Human" EntitySet="Humen" />
+            <End Role="IllegalChild" EntitySet="IllegalChilds" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Human">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateOfDeath" Type="String" Nullable="false" />
+          <Property Name="Sex" Type="Boolean" Nullable="false" />
+          <Property Name="BaseFertilityLevel" Type="Double" Nullable="false" />
+          <Property Name="BaseMarriageDesire" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ChildInfo" Relationship="TWSDataModel.HumanMarriageChild" FromRole="Human" ToRole="MarriageChild" />
+          <NavigationProperty Name="IllegalChild" Relationship="TWSDataModel.HumanIllegalChild" FromRole="Human" ToRole="IllegalChild" />
+        </EntityType>
+        <EntityType Name="MaleHuman" BaseType="TWSDataModel.Human" >
+          <NavigationProperty Name="Marriages" Relationship="TWSDataModel.MaleHumanHumanMarriage" FromRole="MaleHuman" ToRole="HumanMarriage" />
+          <NavigationProperty Name="IllegalPregnants" Relationship="TWSDataModel.MaleHumanIllegalPregnant" FromRole="MaleHuman" ToRole="IllegalPregnant" />
+        </EntityType>
+        <EntityType Name="FemaleHuman" BaseType="TWSDataModel.Human" >
+          <NavigationProperty Name="Marriages" Relationship="TWSDataModel.FemaleHumanHumanMarriage" FromRole="FemaleHuman" ToRole="HumanMarriage" />
+          <NavigationProperty Name="IllegalPregnants" Relationship="TWSDataModel.FemaleHumanIllegalPregnant" FromRole="FemaleHuman" ToRole="IlligalPregnant" />
+        </EntityType>
+        <EntityType Name="HumanMarriage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Husband" Relationship="TWSDataModel.MaleHumanHumanMarriage" FromRole="HumanMarriage" ToRole="MaleHuman" />
+          <Property Name="MaleHumanID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Childs" Relationship="TWSDataModel.HumanMarriageMarriageChild" FromRole="HumanMarriage" ToRole="MarriageChild" />
+          <NavigationProperty Name="Wife" Relationship="TWSDataModel.FemaleHumanHumanMarriage" FromRole="HumanMarriage" ToRole="FemaleHuman" />
+          <Property Name="FemaleHumanID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Pregnants" Relationship="TWSDataModel.HumanMarriagePregnant" FromRole="HumanMarriage" ToRole="Pregnant" />
+        </EntityType>
+        <Association Name="MaleHumanHumanMarriage">
+          <End Type="TWSDataModel.MaleHuman" Role="MaleHuman" Multiplicity="1" />
+          <End Type="TWSDataModel.HumanMarriage" Role="HumanMarriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaleHuman">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HumanMarriage">
+              <PropertyRef Name="MaleHumanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MarriageChild">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Marriage" Relationship="TWSDataModel.HumanMarriageMarriageChild" FromRole="MarriageChild" ToRole="HumanMarriage" />
+          <Property Name="HumanMarriageID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="HumanInfo" Relationship="TWSDataModel.HumanMarriageChild" FromRole="MarriageChild" ToRole="Human" />
+          <NavigationProperty Name="Pregnant" Relationship="TWSDataModel.PregnantMarriageChild" FromRole="MarriageChild" ToRole="Pregnant" />
+        </EntityType>
+        <Association Name="HumanMarriageMarriageChild">
+          <End Type="TWSDataModel.HumanMarriage" Role="HumanMarriage" Multiplicity="1" />
+          <End Type="TWSDataModel.MarriageChild" Role="MarriageChild" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HumanMarriage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MarriageChild">
+              <PropertyRef Name="HumanMarriageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FemaleHumanHumanMarriage">
+          <End Type="TWSDataModel.FemaleHuman" Role="FemaleHuman" Multiplicity="1" />
+          <End Type="TWSDataModel.HumanMarriage" Role="HumanMarriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FemaleHuman">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HumanMarriage">
+              <PropertyRef Name="FemaleHumanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pregnant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="ChildInfo" Relationship="TWSDataModel.PregnantMarriageChild" FromRole="Pregnant" ToRole="MarriageChild" />
+          <NavigationProperty Name="Marriage" Relationship="TWSDataModel.HumanMarriagePregnant" FromRole="Pregnant" ToRole="HumanMarriage" />
+          <Property Name="HumanMarriageID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="HumanMarriageChild">
+          <End Type="TWSDataModel.Human" Role="Human" Multiplicity="1" />
+          <End Type="TWSDataModel.MarriageChild" Role="MarriageChild" Multiplicity="1" />
+        </Association>
+        <Association Name="PregnantMarriageChild">
+          <End Type="TWSDataModel.Pregnant" Role="Pregnant" Multiplicity="1" />
+          <End Type="TWSDataModel.MarriageChild" Role="MarriageChild" Multiplicity="0..1" />
+        </Association>
+        <Association Name="HumanMarriagePregnant">
+          <End Type="TWSDataModel.HumanMarriage" Role="HumanMarriage" Multiplicity="1" />
+          <End Type="TWSDataModel.Pregnant" Role="Pregnant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HumanMarriage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pregnant">
+              <PropertyRef Name="HumanMarriageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IllegalPregnant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Mother" Relationship="TWSDataModel.FemaleHumanIllegalPregnant" FromRole="IlligalPregnant" ToRole="FemaleHuman" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <Property Name="FemaleHumanID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Father" Relationship="TWSDataModel.MaleHumanIllegalPregnant" FromRole="IllegalPregnant" ToRole="MaleHuman" />
+          <Property Name="MaleHumanID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="IllegalChild" Relationship="TWSDataModel.IllegalPregnantIllegalChild" FromRole="IllegalPregnant" ToRole="IllegalChild" />
+        </EntityType>
+        <Association Name="FemaleHumanIllegalPregnant">
+          <End Type="TWSDataModel.FemaleHuman" Role="FemaleHuman" Multiplicity="1" />
+          <End Type="TWSDataModel.IllegalPregnant" Role="IlligalPregnant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FemaleHuman">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IlligalPregnant">
+              <PropertyRef Name="FemaleHumanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MaleHumanIllegalPregnant">
+          <End Type="TWSDataModel.MaleHuman" Role="MaleHuman" Multiplicity="1" />
+          <End Type="TWSDataModel.IllegalPregnant" Role="IllegalPregnant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaleHuman">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IllegalPregnant">
+              <PropertyRef Name="MaleHumanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IllegalChild">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="IllegalPregnant" Relationship="TWSDataModel.IllegalPregnantIllegalChild" FromRole="IllegalChild" ToRole="IllegalPregnant" />
+          <NavigationProperty Name="HumanInfo" Relationship="TWSDataModel.HumanIllegalChild" FromRole="IllegalChild" ToRole="Human" />
+        </EntityType>
+        <Association Name="IllegalPregnantIllegalChild">
+          <End Type="TWSDataModel.IllegalPregnant" Role="IllegalPregnant" Multiplicity="1" />
+          <End Type="TWSDataModel.IllegalChild" Role="IllegalChild" Multiplicity="0..1" />
+        </Association>
+        <Association Name="HumanIllegalChild">
+          <End Type="TWSDataModel.Human" Role="Human" Multiplicity="1" />
+          <End Type="TWSDataModel.IllegalChild" Role="IllegalChild" Multiplicity="0..1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TWSDataModelStoreContainer" CdmEntityContainer="TWSDataEntities">
+    <EntitySetMapping Name="Humen">
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.Human)">
+        <MappingFragment StoreEntitySet="Humen">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="DateOfDeath" ColumnName="DateOfDeath" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="BaseFertilityLevel" ColumnName="BaseFertilityLevel" />
+          <ScalarProperty Name="BaseMarriageDesire" ColumnName="BaseMarriageDesire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.MaleHuman)">
+        <MappingFragment StoreEntitySet="Humen_MaleHuman">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.FemaleHuman)">
+        <MappingFragment StoreEntitySet="Humen_FemaleHuman">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HumanMarriages">
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.HumanMarriage)">
+        <MappingFragment StoreEntitySet="HumanMarriages">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MaleHumanID" ColumnName="MaleHumanID" />
+          <ScalarProperty Name="FemaleHumanID" ColumnName="FemaleHumanID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MarriageChilds">
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.MarriageChild)">
+        <MappingFragment StoreEntitySet="MarriageChilds">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="HumanMarriageID" ColumnName="HumanMarriageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pregnants">
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.Pregnant)">
+        <MappingFragment StoreEntitySet="Pregnants">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="HumanMarriageID" ColumnName="HumanMarriageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IllegalPregnants">
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.IllegalPregnant)">
+        <MappingFragment StoreEntitySet="IllegalPregnants">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="FemaleHumanID" ColumnName="FemaleHumanID" />
+          <ScalarProperty Name="MaleHumanID" ColumnName="MaleHumanID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IllegalChilds">
+      <EntityTypeMapping TypeName="IsTypeOf(TWSDataModel.IllegalChild)">
+        <MappingFragment StoreEntitySet="IllegalChilds">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="HumanMarriageChild" TypeName="TWSDataModel.HumanMarriageChild" StoreEntitySet="Humen">
+      <EndProperty Name="MarriageChild">
+        <ScalarProperty Name="ID" ColumnName="ChildInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="Human">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PregnantMarriageChild" TypeName="TWSDataModel.PregnantMarriageChild" StoreEntitySet="MarriageChilds">
+      <EndProperty Name="Pregnant">
+        <ScalarProperty Name="ID" ColumnName="Pregnant_ID" />
+      </EndProperty>
+      <EndProperty Name="MarriageChild">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="IllegalPregnantIllegalChild" TypeName="TWSDataModel.IllegalPregnantIllegalChild" StoreEntitySet="IllegalChilds">
+      <EndProperty Name="IllegalPregnant">
+        <ScalarProperty Name="ID" ColumnName="IllegalPregnant_ID" />
+      </EndProperty>
+      <EndProperty Name="IllegalChild">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="HumanIllegalChild" TypeName="TWSDataModel.HumanIllegalChild" StoreEntitySet="IllegalChilds">
+      <EndProperty Name="Human">
+        <ScalarProperty Name="ID" ColumnName="HumanInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="IllegalChild">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

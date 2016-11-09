@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a99932e5b4b4de2af27618317be621b" Name="Diagram1" >
+        <EntityTypeShape EntityType="TWSDataModel.Human" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="TWSDataModel.MaleHuman" Width="1.5" PointX="4" PointY="1" />
+        <InheritanceConnector EntityType="TWSDataModel.MaleHuman" />
+        <EntityTypeShape EntityType="TWSDataModel.FemaleHuman" Width="1.5" PointX="0.5" PointY="3.625" />
+        <InheritanceConnector EntityType="TWSDataModel.FemaleHuman" />
+        <EntityTypeShape EntityType="TWSDataModel.HumanMarriage" Width="1.5" PointX="4" PointY="3.375" />
+        <AssociationConnector Association="TWSDataModel.MaleHumanHumanMarriage" />
+        <EntityTypeShape EntityType="TWSDataModel.MarriageChild" Width="1.875" PointX="9.125" PointY="0.5" />
+        <AssociationConnector Association="TWSDataModel.HumanMarriageMarriageChild" />
+        <AssociationConnector Association="TWSDataModel.FemaleHumanHumanMarriage" />
+        <EntityTypeShape EntityType="TWSDataModel.Pregnant" Width="1.5" PointX="6.75" PointY="2" />
+        <AssociationConnector Association="TWSDataModel.HumanMarriageChild" />
+        <AssociationConnector Association="TWSDataModel.PregnantMarriageChild" />
+        <AssociationConnector Association="TWSDataModel.HumanMarriagePregnant" />
+        <EntityTypeShape EntityType="TWSDataModel.IllegalPregnant" Width="1.5" PointX="2" PointY="6.25" />
+        <AssociationConnector Association="TWSDataModel.FemaleHumanIllegalPregnant" />
+        <AssociationConnector Association="TWSDataModel.MaleHumanIllegalPregnant" />
+        <EntityTypeShape EntityType="TWSDataModel.IllegalChild" Width="1.5" PointX="6.125" PointY="6.625" />
+        <AssociationConnector Association="TWSDataModel.IllegalPregnantIllegalChild" />
+        <AssociationConnector Association="TWSDataModel.HumanIllegalChild" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
